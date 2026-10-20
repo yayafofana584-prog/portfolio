@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YAYA – Développeur web | Fofdev</title>
+<meta name="description" content="Portfolio de YAYA, étudiant en génie logiciel à Abidjan. Création de sites web et d’applications de gestion sous la marque Fofdev.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fond:#F2F5F7; --carte:#FFFFFF; --encre:#0E2433; --texte:#2B3E4D; --doux:#5E7080;
+  --ligne:#D5DDE3; --orange:#E8731A; --orange-fonce:#B85208; --vert:#1F7A4D; --nuit:#0B1B27;
+  --titre:"Bricolage Grotesque","Segoe UI",Arial,sans-serif;
+  --corps:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--corps);background:var(--fond);color:var(--texte);line-height:1.65;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+.conteneur{width:min(1080px,92%);margin-inline:auto}
+section{padding:88px 0}
+h1,h2,h3{font-family:var(--titre);color:var(--encre);line-height:1.1}
+h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:12px;font-weight:800}
+.intro{max-width:60ch;color:var(--doux);margin-bottom:40px}
+
+/* Navigation */
+header{position:sticky;top:0;z-index:20;background:rgba(242,245,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ligne)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--titre);font-weight:800;font-size:1.3rem;text-decoration:none;color:var(--encre)}
+.logo span{color:var(--orange)}
+nav ul{display:flex;gap:26px;list-style:none}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--orange-fonce)}
+.burger{display:none;background:none;border:1px solid var(--ligne);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer;color:var(--encre)}
+
+/* Accueil */
+.hero{padding:72px 0 88px}
+.hero-grille{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.1rem);font-weight:800;letter-spacing:-.02em;margin-bottom:20px}
+.hero p{max-width:48ch;margin-bottom:30px;font-size:1.1rem}
+.boutons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:600;text-decoration:none;border:2px solid var(--encre);transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-plein{background:var(--encre);color:#fff}
+.btn-plein:hover{background:var(--orange-fonce);border-color:var(--orange-fonce)}
+.btn-vide:hover{background:var(--encre);color:#fff}
+.terminal{background:var(--nuit);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(11,27,39,.55)}
+.terminal-barre{display:flex;gap:7px;padding:12px 16px;background:#13293A}
+.terminal-barre i{width:11px;height:11px;border-radius:50%;background:#3C566A}
+.terminal pre{font-family:var(--mono);font-size:.88rem;color:#CFE0EA;padding:22px 22px 26px;min-height:270px;white-space:pre-wrap;line-height:1.75}
+.terminal .inv{color:var(--vert);color:#5CD197}
+.terminal .cle{color:#F2A35F}
+.curseur{display:inline-block;width:8px;height:1em;background:#CFE0EA;vertical-align:-2px;animation:clign 1s steps(2) infinite}
+@keyframes clign{50%{opacity:0}}
+
+/* À propos */
+.apropos{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.faits{list-style:none;border-left:3px solid var(--orange);padding-left:22px;display:grid;gap:14px}
+.faits strong{display:block;color:var(--encre);font-family:var(--titre);font-size:1.05rem}
+
+/* Compétences */
+.competences{background:var(--carte);border-block:1px solid var(--ligne)}
+.grille-comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.grille-comp h3{font-size:1.1rem;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--ligne)}
+.etiquettes{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.etiquettes li{font-family:var(--mono);font-size:.82rem;background:var(--fond);border:1px solid var(--ligne);padding:4px 10px;border-radius:6px}
+
+/* Projets */
+.projets{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.projet{background:var(--carte);border:1px solid var(--ligne);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.projet:first-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:28px;border-color:var(--encre)}
+.vignette{border-radius:10px;min-height:170px;display:grid;place-items:center;font-family:var(--titre);font-weight:800;font-size:1.8rem;color:#fff;text-align:center;padding:16px}
+.v1{background:linear-gradient(135deg,#0E2433,#1F7A4D)}
+.v2{background:linear-gradient(135deg,#B85208,#0E2433)}
+.v3{background:linear-gradient(135deg,#1F7A4D,#0B1B27)}
+.projet h3{font-size:1.35rem}
+.projet p{font-size:.97rem;flex:1}
+.liens{display:flex;gap:18px;font-weight:600;font-size:.95rem}
+.liens a{color:var(--orange-fonce)}
+.corps-projet{display:flex;flex-direction:column;gap:14px}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.service{border-top:3px solid var(--encre);padding-top:16px}
+.service h3{font-size:1.15rem;margin-bottom:6px}
+.processus{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;counter-reset:e}
+.processus li{counter-increment:e;background:var(--carte);border:1px solid var(--ligne);border-radius:10px;padding:16px;font-size:.95rem}
+.processus li::before{content:counter(e);display:block;font-family:var(--titre);font-weight:800;font-size:1.6rem;color:var(--orange)}
+.processus b{color:var(--encre)}
+
+/* Formation */
+.formation{background:var(--carte);border-block:1px solid var(--ligne)}
+.chrono{list-style:none;border-left:2px solid var(--ligne);padding-left:26px;display:grid;gap:24px;max-width:700px}
+.chrono li{position:relative}
+.chrono li::before{content:"";position:absolute;left:-33px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--orange)}
+.chrono time{font-family:var(--mono);font-size:.82rem;color:var(--doux)}
+.chrono strong{display:block;color:var(--encre);font-family:var(--titre);font-size:1.1rem}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.coordonnees{list-style:none;display:grid;gap:12px;margin-top:20px}
+.coordonnees a{color:var(--orange-fonce);font-weight:600}
+form{display:grid;gap:14px}
+label{font-weight:600;font-size:.92rem;color:var(--encre)}
+input,textarea{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--ligne);border-radius:8px;background:var(--carte);color:var(--encre);margin-top:4px}
+textarea{min-height:130px;resize:vertical}
+form .btn{cursor:pointer;font-family:inherit;font-size:1rem}
+#retour{font-size:.92rem;color:var(--vert);min-height:1.4em}
+
+footer{background:var(--nuit);color:#9FB3C2;padding:32px 0;font-size:.92rem}
+footer .conteneur{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{color:#CFE0EA}
+
+@media (max-width:860px){
+  .hero-grille,.apropos,.contact,.projet:first-child{grid-template-columns:1fr}
+  .processus{grid-template-columns:1fr 1fr}
+  .burger{display:block}
+  nav ul{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--fond);border-bottom:1px solid var(--ligne);padding:8px 4%}
+  nav ul.ouvert{display:flex}
+  nav li a{display:block;padding:12px 0}
+  section{padding:64px 0}
+}
+@media (max-width:480px){.processus{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.curseur{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="conteneur nav">
+    <a href="#accueil" class="logo">Fof<span>dev</span></a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav aria-label="Navigation principale">
+      <ul id="menu">
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ACCUEIL -->
+<section class="hero" id="accueil">
+  <div class="conteneur hero-grille">
+    <div>
+      <h1>Je construis des sites web solides et sécurisés.</h1>
+      <p>Je suis YAYA, étudiant en génie logiciel à Abidjan. Sous la marque Fofdev, je crée des sites et des applications de gestion pour les petites entreprises.</p>
+      <div class="boutons">
+        <a class="btn btn-plein" href="#projets">Voir mes projets</a>
+        <a class="btn btn-vide" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="terminal" aria-label="Présentation sous forme de terminal">
+      <div class="terminal-barre" aria-hidden="true"><i></i><i></i><i></i></div>
+      <pre id="terminal" aria-live="off"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="conteneur apropos">
+    <div>
+      <h2>À propos</h2>
+      <p style="margin-bottom:14px">Je suis en troisième année de licence en génie logiciel. J’aime transformer un besoin concret en un outil qui fonctionne : un site de location de véhicules, un quiz de réseaux, une application de gestion.</p>
+     
+      <p><a href="CV-YAYA.pdf" id="btn-cv" class="btn btn-vide" style="margin-top:10px" download="CV-YAYA.pdf">Télécharger mon CV</a></p>
+    </div>
+    <ul class="faits">
+      <li><strong>Où</strong>Abidjan, Côte d’Ivoire</li>
+      <li><strong>Études</strong>Licence 3 Génie logiciel</li>
+      <li><strong>Marque</strong>Fofdev, développement web</li>
+      <li><strong>Disponibilité</strong>Stage et missions freelance</li>
+    </ul>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section class="competences" id="competences">
+  <div class="conteneur">
+    <h2>Compétences</h2>
+    <p class="intro">Les outils que j’utilise dans mes projets et mes cours.</p>
+    <div class="grille-comp">
+      <div><h3>Web</h3><ul class="etiquettes"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Angular</li><li>PHP</li></ul></div>
+      <div><h3>Serveur</h3><ul class="etiquettes"><li>Node.js</li><li>Express</li><li>Java / JEE</li><li>Python</li></ul></div>
+      <div><h3>Données</h3><ul class="etiquettes"><li>MySQL</li><li>MongoDB</li><li>Redis</li><li>Pandas</li></ul></div>
+      <div><h3>Réseaux et sécurité</h3><ul class="etiquettes"><li>Linux</li><li>Cisco / Packet Tracer</li><li>VPN</li><li>Virtualisation KVM</li></ul></div>
+      <div><h3>Outils</h3><ul class="etiquettes"><li>Git</li><li>VS Code</li><li>Android Studio</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="conteneur">
+    <h2>Projets</h2>
+    <p class="intro">Des réalisations en ligne ou des travaux pratiques menés jusqu’au bout.</p>
+    <div class="projets">
+      <article class="projet">
+        <div class="vignette v1">AutoLux</div>
+        <div class="corps-projet">
+          <h3>AutoLux, location et vente de véhicules</h3>
+          <p>Site complet pour une entreprise d’Abidjan : catalogue de véhicules, gestion des annonces et des demandes de location. Développé en PHP avec une base MySQL.</p>
+          <ul class="etiquettes"><li>PHP</li><li>MySQL</li><li>JavaScript</li></ul>
+          <div class="liens"><a href="https://autolux.gamer.gd" target="_blank" rel="noopener">Voir le site</a></div>
+        </div>
+      </article>
+      <article class="projet">
+        <div class="vignette v2">Fofdev Quiz</div>
+        <h3>Fofdev Quiz</h3>
+        <p>Application de quiz pour s’entraîner aux réseaux Cisco. Interface React, API PHP et base MySQL.</p>
+        <ul class="etiquettes"><li>React</li><li>PHP</li><li>MySQL</li></ul>
+        <div class="liens"><span style="color:var(--doux)">Remise en ligne en cours</span></div>
+      </article>
+      <article class="projet">
+        <div class="vignette v3">Super Sand</div>
+        <h3>Super Sand, commande de sandwichs</h3>
+        <p>Application de commande en ligne : API Node.js/Express en architecture MVC, base MySQL et interface Angular.</p>
+        <ul class="etiquettes"><li>Node.js</li><li>Angular</li><li>MySQL</li></ul>
+        <div class="liens"><a href="https://github.com/yayafofana584-prog" target="_blank" rel="noopener">Code source</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="competences">
+  <div class="conteneur">
+    <h2>Services</h2>
+    <p class="intro">Ce que je peux faire pour votre activité.</p>
+    <div class="services">
+      <div class="service"><h3>Site vitrine</h3><p>Un site clair et rapide qui présente votre entreprise et se lit bien sur téléphone.</p></div>
+      <div class="service"><h3>Application de gestion</h3><p>Clients, stocks, réparations, commandes : un outil adapté à votre façon de travailler.</p></div>
+      <div class="service"><h3>Sécurisation</h3><p>Vérification de votre site : mots de passe, formulaires, accès et sauvegardes.</p></div>
+    </div>
+    <ol class="processus">
+      <li><b>Échange</b> Vous me décrivez votre besoin.</li>
+      <li><b>Devis</b> Je propose une solution et un prix.</li>
+      <li><b>Création</b> Je développe et vous montre l’avancement.</li>
+      <li><b>Mise en ligne</b> Je publie le site et je vous forme.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="formation" style="background:var(--fond);border:0">
+  <div class="conteneur">
+    <h2>Formation</h2>
+    <ul class="chrono" style="margin-top:28px">
+      <li><time>En cours</time><strong>Licence 3 Génie logiciel</strong>Université Nord Sud Abidjan</li>
+      <li><time>En préparation</time><strong>En cours d'apprentissage</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="competences">
+  <div class="conteneur contact">
+    <div>
+      <h2>Contact</h2>
+      <p>Un projet de site, une mission ou un stage ? Écrivez-moi, je réponds rapidement.</p>
+      <ul class="coordonnees">
+        <li>Email : <a href="mailto:yayafofana584@gmail.com">yayafofana584@gmail.com</a></li>
+        <li>WhatsApp : <a href="https://wa.me/2250585598893" target="_blank" rel="noopener">+225 0585598893</a></li>
+        <li>GitHub : <a href="https://github.com/yayafofana584-prog" target="_blank" rel="noopener">github.com/yayafofana584-prog</a></li>
+        <li>LinkedIn : <a href="https://www.linkedin.com/in/yaya-fofana-858266413" target="_blank" rel="noopener">linkedin.com/in/yaya-fofana-858266413</a></li>
+      </ul>
+    </div>
+    <form id="formulaire" novalidate>
+      <div><label for="nom">Nom</label><input id="nom" name="nom" type="text" autocomplete="name" required></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+      <button class="btn btn-plein" type="submit">Envoyer le message</button>
+      <p id="retour" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="conteneur">
+    <span>© <span id="annee">2026</span> YAYA, Fofdev. Abidjan.</span>
+    <span><a href="#accueil">Retour en haut</a></span>
+  </div>
+</footer>
+
+<script>
+/* ===== À MODIFIER : adresse qui reçoit les messages du formulaire ===== */
+var EMAIL_CONTACT = "yayafofana584@gmail.com";
+
+/* Menu mobile */
+var burger = document.getElementById("burger"), menu = document.getElementById("menu");
+burger.addEventListener("click", function(){
+  var ouvert = menu.classList.toggle("ouvert");
+  burger.setAttribute("aria-expanded", ouvert);
+});
+menu.addEventListener("click", function(){ menu.classList.remove("ouvert"); burger.setAttribute("aria-expanded","false"); });
+
+/* Terminal : une seule animation à l’arrivée sur la page */
+var lignes = [
+  '<span class="inv">yaya@fofdev</span>:~$ whoami',
+  'YAYA, développeur web',
+  '<span class="inv">yaya@fofdev</span>:~$ cat profil.txt',
+  '<span class="cle">études</span>   : L3 génie logiciel',
+  '<span class="cle">stack</span>    : PHP, React, Node.js, Angular',
+  '<span class="cle">statut</span>   : disponible pour missions'
+];
+var cible = document.getElementById("terminal");
+var reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function afficher(n){
+  cible.innerHTML = lignes.slice(0,n).join("\n") + '\n<span class="curseur"></span>';
+}
+if(reduit){ afficher(lignes.length); }
+else{
+  var i = 0;
+  var minuterie = setInterval(function(){
+    i++; afficher(i);
+    if(i >= lignes.length) clearInterval(minuterie);
+  }, 650);
+}
+
+/* Formulaire : ouvre le client mail (aucun serveur requis) */
+document.getElementById("formulaire").addEventListener("submit", function(e){
+  e.preventDefault();
+  var nom = this.nom.value.trim(), email = this.email.value.trim(), msg = this.message.value.trim();
+  var retour = document.getElementById("retour");
+  if(!nom || !/^\S+@\S+\.\S+$/.test(email) || !msg){
+    retour.style.color = "#B3261E";
+    retour.textContent = "Renseignez votre nom, un email valide et un message.";
+    return;
+  }
+  var corps = msg + "\n\n" + nom + " (" + email + ")";
+  window.location.href = "mailto:" + EMAIL_CONTACT + "?subject=" + encodeURIComponent("Message depuis le portfolio") + "&body=" + encodeURIComponent(corps);
+  retour.style.color = "";
+  retour.textContent = "Votre application mail va s’ouvrir pour envoyer le message.";
+});
+
+
+/* CV intégré : le PDF est contenu dans cette page, le téléchargement démarre au clic */
+var CV_BASE64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgOCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0EgPDwKL1MgL1VSSSAvVHlwZSAvQWN0aW9uIC9VUkkgKG1haWx0bzp5YXlhZm9mYW5hNTg0QGdtYWlsLmNvbSkKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyAyMi42NzcxNyA2NjQuNDIxMSAxMjcuMDAzOCA2NzYuNjIxMSBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNSAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly95YXlhZm9mYW5hNTg0LXByb2cuZ2l0aHViLmlvKQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDIyLjY3NzE3IDYzNy4yMjExIDEzNC4wNjQ0IDY0OS40MjExIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago2IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL2dpdGh1Yi5jb20veWF5YWZvZmFuYTU4NC1wcm9nKQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDIyLjY3NzE3IDYxMy4wMjExIDE0My42MTkgNjI1LjIyMTEgXSAvU3VidHlwZSAvTGluayAvVHlwZSAvQW5ub3QKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL0EgPDwKL1MgL1VSSSAvVHlwZSAvQWN0aW9uIC9VUkkgKGh0dHBzOi8vd3d3LmxpbmtlZGluLmNvbS9pbi95YXlhLWZvZmFuYS04NTgyNjY0MTMpCj4+IC9Cb3JkZXIgWyAwIDAgMCBdIC9SZWN0IFsgMjIuNjc3MTcgNTkwLjE3MTEgMTUxLjgyOTQgNjAwLjY3MTEgXSAvU3VidHlwZSAvTGluayAvVHlwZSAvQW5ub3QKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago5IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL2F1dG9sdXguZ2FtZXIuZ2QpCj4+IC9Cb3JkZXIgWyAwIDAgMCBdIC9SZWN0IFsgMzI2LjgzMTcgNTU0LjE1NjEgMzk3LjkxMDkgNTY1LjE5NjEgXSAvU3VidHlwZSAvTGluayAvVHlwZSAvQW5ub3QKPj4KZW5kb2JqCjEwIDAgb2JqCjw8Ci9Bbm5vdHMgWyA0IDAgUiA1IDAgUiA2IDAgUiA3IDAgUiA5IDAgUiBdIC9Db250ZW50cyAxNCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCAxMyAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgCiAgL1RyYW5zIDw8Cgo+PiAvVHlwZSAvUGFnZQo+PgplbmRvYmoKMTEgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyAxMyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjEyIDAgb2JqCjw8Ci9BdXRob3IgKFlBWUEgRk9GQU5BKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYxMDIwMTEwNTM3KzAwJzAwJykgL0NyZWF0b3IgKFwodW5zcGVjaWZpZWRcKSkgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYxMDIwMTEwNTM3KzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKEN1cnJpY3VsdW0gdml0YWUpIC9UaXRsZSAoQ1YgLSBZQVlBIEZPRkFOQSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iagoxMyAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDEwIDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTQgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMjQ2NQo+PgpzdHJlYW0KR2F1MEVnTiklLiZxMExVb1Y2IyE1bVcibUghODFERic3OFg3JS5wZFEhW28zUDJWTHFfTWA1S21EaixJVWFYcl9DY14iMS5pLSpTa2dQTz9WbjZYTSVmVDwlNDNkaV9jL0BzcSJqMTQyI08ycDxBdUctLEc0YkJeNm89RGghKGMwS11ZW0lqJXQrcixpXmMidEtUcnUnaSIzLFNHUmZlLU8+LV81TGNDdEYzPUgxMSsoWFxNXHFPSk8mSmZVVDpzJyhUXWw8cGBqQCNeJSFjXkI5XmA9QzVxL2wzZi1db0tzUyZcZ29FUjNhWkkycjFjXUBxU01KOyh1bmNBQ0cpTCVmOiMhJDJhLSQ+ZnFpLE1ab0tKLituczpdP3MkYWUnckVvPnRvKV03SlooanRSOXFGaWBfWFVaYDciKHFTPztnKE0tJUwtMipcJFkvRSEtMjZVcVZZUDZdbE4xdGMndTU7Ii9pZmIuU0xDMF5PO15rby85TkxwX2FoJT4uZ11xKDpwSDB0JilMQU1YZ0wlK0xgWmFWISdeZ0lDUCFAOGp0Tzk5OElxWCJOLUdQcE0mVVRdMiovWzg0LzpoQD0hRmRnPVBSZE1vRWo6KVYiZ0soSlhGVjBhJXRRX2pvYE5wR1ZVNVljczM7TkxBNl9oYWQjSjlLSEEmJC0yNjRmNj86MGJxbjEnTytVPmRoPmlIXzljOUUwO18iIzM8JkFldSY0b2c6NDhbcSV1MF5BSEc+JlFWRyIzK3MnWTVlQGxkQlhrPyNIX1dgMyVoQidyVXJcZmUldGhKYFAlWiVGLm46KF0pUSNHNkRZc1FaTjM3N0BIWVElImc2YSxubiM3TGlpXnRjVHNQWGludE1UOVdRR0k9aVwnYTMpLUtSL011cEcrQURccXJIcEpPSlx1cjZYK0BqWis2KSsqTjxNL1FXIT5bRS9oKlpwVzNNb1EpXkNbdDc6PDo+XjpTW11qLWYvV11ESi88MlEyVnFqY1soLGQwSGViL1UuOWhfSDRjaGxBKm83LWRBLSRrIlU9cTw8RzJOKz4wb21ycGFMJklwbmlvLCltJCo9Jy50Oko7UCpATjRrZClDQTRvayYuVDxuIyFOKTo6MV0+Wms1XHNTQCVdREJCPkxJXzIzSzNxaCl1X2QkWmNgZi5kQVBbTi4ySioyRjo7TnA4a2U4My9aVVVSUD8/UFlDUkNsUj9JWXImYGMxSjRpYXFJb0daYTwyPWZlaEpmU11cazpGKkoiYTcvJio9aWRtYmdqbG0namhsaV9yZXBbPTNaZ1VxZipjYUZWcXMnTEoiTExuOjsmZ1xhNUc7M1ZkRDFUQj1WQDBuKSdQMy1PTiNIJjM6QyozLmMjMDYwJW1mNVY4aDJuJFxyWi0pZzlvLyNuUExgIy9OOSghSSFzOUI9KGRNdDlaTT0vcjM2T2ZEO1kuYkYwbm1xNDxOX1NiVDFPb01iajw0WTZYPTpHaTInVFM7OkEhbEpVYUFpOj9kcE5aYTkmMC5PViRYJSRkcVhbVWkzQUFPSFo3W09aRT4tMHJJLUBbLVxYZmxccSpdViZEPilubi0/bVdOPSxydFtbZDY1NCFaS29SV0pjX1hdQHRlOnFEZllBc2VKSSEmaEsvM0k0MUtKKG90NTEkdS4wQEkjI0paTSFbSFhkcnNqOjk7UCIuTk4hJGhlKG5CI2UuPi1iSD45VlhhTF0xNG1vZk5UT1Zjb1k1Tlk4JFozUSI5SGw7XjFFcFgmYF0iQklnYj9ON2JcZ2tdQl0sbUU2VjwlZUc7OUshUHIpJE5sdFJuJj5kSlo7TVcqKElVJ0c5ZXE5LDo2OzYlZD9KYi1PaUZLNik9aypWV1VDaVFRUDM0SjZCVU0tRytIazpkc0AxWDBvZ15xWFQ+LjNeKjxrcSVmPGJdXmgvZzFza007aS8iaT9ZJENFXmVvRV8mdV8uPVcoNDFtckchOVI0UCNeRSRgXDRCciZHJiRZX2NEUyUyQi1wZlQsN2oqZThLUUZOOiJXQi5iWiJvXjxZYiI9MzFYdTNgI201JWIuKD5IS2AxKTFXTDE0VidHLmFDP1RHcEJBJjcmQDZRS1lAKlVuLSZEXGQ5a1NARzkwMjQ+ZGxhU1dONXMoXi1gPyNvQitPMyZRVmUyUUBwZCtXYldAJGwjVSVeXyRXTHEybUBPcjJmQUwqX3FRcEYyVFJpYjtQVzBXbTUyJ2tfPy9URG5QJypDIS9BUGowVjdUZC5FWk1DbS9aOydeLFkqdFVxWVQySidvKjJeSWBGL2Q5YWIxMFpURG0sMigwOUJEWDopMmJcc0JSOjtQTT06OjVTLUhFL1IvZGtbZm1pMSFJMjxALyghamZVaUVaM3NqMU10XVhTYkpXMi1KLiI6OjFUKWJPMWphUFI9SlNTSF1pb0E1XGQrZipFYFlBQVs0aTIiSjU0Nmk6aW1VLDs4UG88cl11WVIuKENSaDpGRiJDVlZQME1RV1hmXHUjTWwpIXJdcV4/ZltpR2hBLE1BSFpvM29hcVY2LnIzUXJXQEsyNCpnKThUJ245YVtdcnBHWVVeYEhGY0MvJk8+UHA0czQtV2RJLl0kIyQ8JVlJJydwP3RtQGdsSEckdDIycj8pSDgpZzQxRTFiJChwM2gsZixwUEtjQCNmR0U8OkFARDh0YnEoUzdPNTdUOU9GQnBpLS5cSjUzYWQ8OGBZQVReYC9AaDc/WjJHVCE2YipIV0YmSGFWZignKThmL1dCIVVXVUthaS5tKyVZNT8xRlhYRC1tLiZCOCsrbVw7KHA2OEAsRjxNKWVRUkBqcGhhZSs3bT0jJkJaK1s4OGopZCwxJFxvWTYzNkFjOitOYz5BLjVUVj10JWlNJUMsM2pdKUJNX0FmZ1dDTTEoMm5qYFM4Yk03TDBdMzVURXBTamp1NEcrJ1lYSyovRkNmUDdVJ01iaShvWSNKQ0xENyQtU0M9b1tZZGRkVVcwNGVdOmdzaiVOO2NtXnFoTm8vajknV2o7KigvLzRMZighJ0E+V2I7ZHNEKVhZXEFSQmwib1A8I3JdOURZNW9EWVAyUUA5XjxzMG9zI3RnV2pwc1s5IyJpXztmNWVxZGFJTlFTazRfbSdrNklORGlOVVxuX3FDT1hCNmR0X1lHTkVcYiErdExIQ0M5PWZKcV5MYEssZC1jQ2NacW1IXW4+PFNrdVJvMigkOUpCX11oXFEuVmxnSGhYSzxkSEs8MVdTKShudEMjYHFzQk8xazklPm9IQ1FGJ29LT2tqKC90fj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDExMiAwMDAwMCBuIAowMDAwMDAwMjE5IDAwMDAwIG4gCjAwMDAwMDAzMzEgMDAwMDAgbiAKMDAwMDAwMDUxMyAwMDAwMCBuIAowMDAwMDAwNzAxIDAwMDAwIG4gCjAwMDAwMDA4ODkgMDAwMDAgbiAKMDAwMDAwMTA5MCAwMDAwMCBuIAowMDAwMDAxMjA1IDAwMDAwIG4gCjAwMDAwMDEzODEgMDAwMDAgbiAKMDAwMDAwMTYyOSAwMDAwMCBuIAowMDAwMDAxNjk5IDAwMDAwIG4gCjAwMDAwMDE5ODIgMDAwMDAgbiAKMDAwMDAwMjA0MyAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzxlMTRkZjk1NTI0YWM5MDZiZGIyODU3MTVkYjA4MmE4YT48ZTE0ZGY5NTUyNGFjOTA2YmRiMjg1NzE1ZGIwODJhOGE+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDEyIDAgUgovUm9vdCAxMSAwIFIKL1NpemUgMTUKPj4Kc3RhcnR4cmVmCjQ2MDAKJSVFT0YK";
+document.getElementById("btn-cv").addEventListener("click", function(e){
+  try{
+    var bin = atob(CV_BASE64), n = bin.length, octets = new Uint8Array(n);
+    for(var k = 0; k < n; k++) octets[k] = bin.charCodeAt(k);
+    var url = URL.createObjectURL(new Blob([octets], {type: "application/pdf"}));
+    var lien = document.createElement("a");
+    lien.href = url; lien.download = "CV-YAYA.pdf";
+    document.body.appendChild(lien); lien.click(); lien.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    e.preventDefault();
+  }catch(err){ /* en cas d’erreur, le lien normal vers CV-YAYA.pdf prend le relais */ }
+});
+
+document.getElementById("annee").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
